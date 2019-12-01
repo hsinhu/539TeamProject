@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<style>
+body {
+  font-family: Verdana, sans-serif;
+  margin: 0;
+  background-color: #f1f1f1;
+
+}
+
+
+* {
+  box-sizing: border-box;
+}
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: white;
+  cursor: pointer;
+  margin-top:2%;
+  margin-left: 2%; 
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+
+.btn:focus{
+  background-color:#ddd;;
+}
+a {
+  text-decoration: none;
+  font-size:1.5em;
+  color:black;
+}
+
+.row > .column {
+  padding: 10px 8px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  width: 16%;
+}
+.column img:hover{
+  filter: drop-shadow(6px 6px 6px black);
+
+}
+.column img:focus{
+  filter: drop-shadow(6px 6px 6px black);
+
+}
+.column1 {
+  float: left;
+  width: 16%;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mySlides {
+  display: none;
+
+}
+.mySlides img{
+  height:500px;
+  max-width: 100%
+}
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+img {
+  margin-bottom: -4px;
+}
+
+.caption-container {
+  text-align: center;
+  background-color: black;
+  padding: 2px 16px;
+  color: white;
+}
+
+.demo {
+  opacity: 0.4;
+}
+
+.active,
+ .demo:focus {
+  opacity: 1;
+  filter: drop-shadow(5px 5px 5px white);
+  }
+.demo:hover{
+  opacity: 1;
+  filter: drop-shadow(5px 5px 5px blue);
+}
+img.hover-shadow {
+  transition: 0.3s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+</style>
+<body>
+<header>
+  <button class="btn"><a href="filter.html">prev</a></button>
+  <button class="btn"><a href="index.html">next</a></button>
+
+</header>
+<h2 style="text-align:center">Gallaxy Gallery</h2>
+
+<div class="row">
+  <div class="column">
+    <img src="https://images.unsplash.com/photo-1498611291069-aa296192f1e4?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=fb0549d4720e2935933e47c300694376" style="width:100%" tabindex="0" onkeydown="tabopen(1)" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="https://images.unsplash.com/photo-1513786704796-b35842f0dca6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=1a49b902034b6eab563a8f328a26a6ef
+" style="width:100%" tabindex="0" onkeydown="tabopen(2)" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=f4eed218cf7f756a52735329876454c5
+" style="width:100%" tabindex="0" onkeydown="tabopen(3)" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="https://images.unsplash.com/photo-1502481851512-e9e2529bfbf9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=c1a612a6073090ba04f9e5af7e42dd45" style="width:100%" tabindex="0" onkeydown="tabopen(4)" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
+  </div>
+    <div class="column">
+    <img src="https://images.unsplash.com/photo-1520257328559-2062fc7de0b3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=a2281ba006a4428c117b6b2e2dfb8ba1" style="width:100%" tabindex="0" onkeydown="tabopen(5)" onclick="openModal();currentSlide(5)" class="hover-shadow cursor">
+  </div>
+    <div class="column">
+    <img src="https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=b96f9a2cdd63c4accdb7bdd5cfe435c9" style="width:100%" tabindex="0" onkeydown="tabopen(6)" onclick="openModal();currentSlide(6)" class="hover-shadow cursor">
+  </div>
+</div>
+
+<div id="myModal" class="modal">
+  <span class="close cursor" onclick="closeModal()">&times;</span>
+  <div class="modal-content">
+
+    <div class = "allSlides" tabindex="0">
+    <div class="mySlides">
+      <div class="numbertext">1 / 6</div>
+      <img src="https://images.unsplash.com/photo-1498611291069-aa296192f1e4?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=fb0549d4720e2935933e47c300694376" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">2 / 6</div>
+      <img src="https://images.unsplash.com/photo-1513786704796-b35842f0dca6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=1a49b902034b6eab563a8f328a26a6ef" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">3 / 6</div>
+      <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=f4eed218cf7f756a52735329876454c5" style="width:100%">
+    </div>
+    
+    <div class="mySlides">
+      <div class="numbertext">4 / 6</div>
+      <img src="https://images.unsplash.com/photo-1502481851512-e9e2529bfbf9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=c1a612a6073090ba04f9e5af7e42dd45" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">5 / 6</div>
+      <img src="https://images.unsplash.com/photo-1520257328559-2062fc7de0b3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=a2281ba006a4428c117b6b2e2dfb8ba1" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">6 / 6</div>
+      <img src="https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=b96f9a2cdd63c4accdb7bdd5cfe435c9" style="width:100%">
+    </div>
+    </div>
+    
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    <div class="caption-container">
+      <p id="caption"></p>
+    </div>
+
+
+    <div class="column1" tabindex="0" onfocus="currentSlide(1)">
+      <img class="demo cursor" src="https://images.unsplash.com/photo-1498611291069-aa296192f1e4?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=fb0549d4720e2935933e47c300694376" style="width:100%" alt="Robson Hatsukami Morgan">
+    </div>
+    <div class="column1" tabindex="0" onfocus="currentSlide(2)" >
+      <img class="demo cursor" src="https://images.unsplash.com/photo-1513786704796-b35842f0dca6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=1a49b902034b6eab563a8f328a26a6ef" style="width:100%" alt="Jonatan Pie">
+    </div>
+    <div class="column1" tabindex="0" onfocus="currentSlide(3)">
+      <img class="demo cursor" src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=f4eed218cf7f756a52735329876454c5" style="width:100%" alt="The stars and galaxy as seen from Rocky Mountain National Park.">
+    </div>
+    <div class="column1" tabindex="0" onfocus="currentSlide(4)">
+      <img class="demo cursor" src="https://images.unsplash.com/photo-1502481851512-e9e2529bfbf9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=c1a612a6073090ba04f9e5af7e42dd45" style="width:100%" alt="Berhard Grossgasteiger" >
+    </div>
+
+    <div class="column1" tabindex="0" onfocus="currentSlide(5)">
+      <img class="demo cursor" src="https://images.unsplash.com/photo-1520257328559-2062fc7de0b3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=a2281ba006a4428c117b6b2e2dfb8ba1" style="width:100%" alt="Raphael Nogueira">
+    </div>
+
+    <div class="column1" tabindex="0" onfocus="currentSlide(6)">
+      <img class="demo cursor" src="https://images.unsplash.com/photo-1468276311594-df7cb65d8df6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyOTN9&s=b96f9a2cdd63c4accdb7bdd5cfe435c9" style="width:100%" alt="Colorful starry night sky with the Milky Way and a shooting star over Ryes">
+    </div>
+  </div>
+</div>
+
+<script>
+var column1= document.getElementsByClassName("column1");
+
+function Myfunction(e){
+  if(e.keyCode == 37){
+    plusSlides(-1)
+    column1[slideIndex-1].focus();
+  }
+  else if(e.keyCode == 39){
+    plusSlides(1)
+    column1[slideIndex-1].focus();
+  }
+  else if(event.keyCode == 27){
+    closeModal()
+  
+  }
+
+  }
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+  document.querySelector(".row").style.display = "none";
+  document.addEventListener('keydown', Myfunction);
+}
+
+function tabopen(a){
+  console.log(a)
+  if(event.keyCode == 13){
+    openModal();
+    currentSlide(a);
+  }
+  else return;
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+  document.querySelector(".row").style.display = "block";
+  document.removeEventListener('keydown', Myfunction);
+
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+  // console.log(slideIndex)
+}
+
+function currentSlide(n) {
+
+  showSlides(slideIndex = n);
+
+
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+
+</script>
+    
+</body>
+</html>
