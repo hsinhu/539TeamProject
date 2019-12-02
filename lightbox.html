@@ -2,7 +2,6 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <style>
 body {
   font-family: Verdana, sans-serif;
@@ -113,7 +112,6 @@ a {
 
 .mySlides {
   display: none;
-
 }
 .mySlides img{
   height:500px;
@@ -293,16 +291,16 @@ img.hover-shadow {
 </div>
 
 <script>
-var column1= document.getElementsByClassName("column1");
+// var column1= document.getElementsByClassName("column1");
 
 function Myfunction(e){
   if(e.keyCode == 37){
     plusSlides(-1)
-    column1[slideIndex-1].focus();
+    // column1[slideIndex-1].focus();
   }
   else if(e.keyCode == 39){
     plusSlides(1)
-    column1[slideIndex-1].focus();
+    // column1[slideIndex-1].focus();
   }
   else if(event.keyCode == 27){
     closeModal()
@@ -356,11 +354,21 @@ function showSlides(n) {
   if (n < 1) {slideIndex = slides.length}
   for (i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
+      slides[i].style.opacity = "0";
+      // $(slides[i]).hide().fadeOut()
   }
   for (i = 0; i < dots.length; i++) {
       dots[i].className = dots[i].className.replace(" active", "");
   }
+
   slides[slideIndex-1].style.display = "block";
+  $(slides[slideIndex-1]).css({
+    "opacity":"0.4",
+    "display":"block",
+}).show().animate({opacity:1},800)
+    // $(slides[slideIndex-1]).show().effect("slide", 600 );
+  // $(slides[slideIndex-1]).delay(1000).fadeIn();
+
   dots[slideIndex-1].className += " active";
   captionText.innerHTML = dots[slideIndex-1].alt;
 }
