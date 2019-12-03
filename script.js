@@ -19,14 +19,17 @@ $(".vintalight__photo").click(function popout(e){
             }, 500);
             document.body.style.overflow = "auto";
         });
-        window.addEventListener("keydown", Myfunction, {once: true});
+        window.addEventListener("keydown", Myfunction);
     }
 });
-
 function Myfunction(e){
+    var esc_count = 0;
     if (e.key === "Escape") {
-        if ($(".active").length == 2){
-        document.getElementById("button-close").click();}
+        esc_count++
+        document.getElementById("button-close").click()
+        if (esc_count) {
+            window.removeEventListener("keydown", Myfunction);
+        }
     }
 }
 
@@ -54,14 +57,8 @@ $(".vintalight__container").keydown(function(e){
                     document.body.style.overflow = "auto";
 
                 });
-            window.addEventListener("keydown", Myfunction, {once: true});
+            window.addEventListener("keydown", Myfunction);
             } 
         }
     }
-    if (e.key === "Escape" ){
-        if ($(".active").length == 2){
-        document.getElementById("button-close").click();}
-    }
-
 });
-
